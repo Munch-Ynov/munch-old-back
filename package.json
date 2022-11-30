@@ -1,30 +1,44 @@
 {
-  "name": "munch-back",
-  "private": true,
-  "version": "0.1.0",
-  "description": "A Strapi application",
+  "name": "api_netflix_wish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
-    "build": "strapi build",
-    "strapi": "strapi"
+    "test": "jest --runInBand --forceExit",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
   },
-  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrBartou/api_netflix_wish.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@strapi/strapi": "4.5.0",
-    "@strapi/plugin-users-permissions": "4.5.0",
-    "@strapi/plugin-i18n": "4.5.0",
-    "better-sqlite3": "7.4.6"
+    "and": "^0.0.3",
+    "axios": "^1.1.3",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-openapi-validator": "^4.13.8",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "redis": "^4.5.0",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0",
+    "yamljs": "^0.3.0"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "devDependencies": {
+    "jest": "^29.2.0",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.3",
+    "sqlite3": "^5.1.2",
+    "supertest": "^6.3.0"
   },
-  "strapi": {
-    "uuid": "a6a86e56-eb19-4374-88f5-8e0b8daa5d12"
+  "bugs": {
+    "url": "https://github.com/MrBartou/api_netflix_wish/issues"
   },
-  "engines": {
-    "node": ">=14.19.1 <=18.x.x",
-    "npm": ">=6.0.0"
-  },
-  "license": "MIT"
+  "homepage": "https://github.com/MrBartou/api_netflix_wish#readme"
 }
