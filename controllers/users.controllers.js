@@ -54,7 +54,7 @@ async function loginUser(req, res) {
         } else {
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.cookie('token', token, { httpOnly: true });
-            return res.status(200).json({ message: 'User logged in' });
+            return res.status(200).json({ message: 'User logged in' , token: token});
         }
     }
 }

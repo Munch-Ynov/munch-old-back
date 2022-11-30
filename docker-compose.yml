@@ -14,32 +14,32 @@ services:
       - /app/node_modules/
       - .:/app
     depends_on:
-      - mysql
+      # - mysql
       - redis
 
-  pma:
-    image: phpmyadmin
-    container_name: pma-container
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      UPLOAD_LIMIT: 1024M
-    ports:
-      - "8080:80"
-    links:
-      - mysql:mysql
+  # pma:
+  #   image: phpmyadmin
+  #   container_name: pma-container
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_PORT: 3306
+  #     UPLOAD_LIMIT: 1024M
+  #   ports:
+  #     - "8080:80"
+  #   links:
+  #     - mysql:mysql
 
-  mysql:
-    container_name: mysql-container
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: netflix_wish
-    ports:
-      - "3306:3306"
-    expose:
-      - "3306"
+  # mysql:
+  #   container_name: mysql-container
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: netflix_wish
+  #   ports:
+  #     - "3306:3306"
+  #   expose:
+  #     - "3306"
 
   redis:
     image: redis
