@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
