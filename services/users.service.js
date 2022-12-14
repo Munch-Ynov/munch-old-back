@@ -13,7 +13,18 @@ async function createUser(user) {
         favoris: user.favoris,
         admin: false,
     };
-    return db.create(newUser);
+    user = await db.create(newUser);
+    const userCreate = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        favoris: user.favoris,
+        admin: user.admin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+    };
+    return userCreate;
 }
 
 async function loginUser(email, password) {
@@ -25,7 +36,18 @@ async function loginUser(email, password) {
     if (!validPassword) {
         return null;
     }
-    return user;
+    // return user without password
+    const userLogin = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        favoris: user.favoris,
+        admin: user.admin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+    };
+    return userLogin;
 }
 
 function getAllUsers() {
