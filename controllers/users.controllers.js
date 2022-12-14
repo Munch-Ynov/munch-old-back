@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 
 
 async function getAllUsers(req, res) {
-  const users = await UsersService.getAllUsers();
+    const users = await UsersService.getAllUsers();
 
-  if (!users) {
-    return res.status(404).json({ message: 'Users not found' });
-  } else {
-    return res.status(200).json(users);
-  }
+    if (!users) {
+        return res.status(404).json({ message: 'Users not found' });
+    } else {
+        return res.status(200).json(users);
+    }
 }
 
 async function getUserById(req, res) {
@@ -27,6 +27,20 @@ async function getUserById(req, res) {
         }
     }
 }
+async function getMe(req, res) {
+    const token = req.headers.cookie.split('=')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decodedToken.id;
+    const user = await UsersService.getUserById(userId);
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    } else {
+        return res.status(200).json(user);
+    }
+}
+
+
 
 async function createUser(req, res) {
     if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
@@ -97,6 +111,7 @@ module.exports = {
     getAllUsers,
     getUserById,
     createUser,
+    getMe,
     loginUser,
     updateUser,
     deleteUser

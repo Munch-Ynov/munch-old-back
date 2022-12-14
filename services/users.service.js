@@ -54,8 +54,19 @@ function getAllUsers() {
     return db.findAll();
 }
 
-function getUserById(id) {
-    return db.findByPk(id)
+async function getUserById(id) {
+    const user = await db.findByPk(id)
+    const userCreate = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        favoris: user.favoris,
+        admin: user.admin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+    };
+    return userCreate;
 }
 
 function getUserByEmail(email) {
