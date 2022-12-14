@@ -6,7 +6,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./openapi.yaml');
 const OpenApiValidator = require('express-openapi-validator');
 
-
+const restaurantsRoutes = require("./routes/restaurants.router");
 const usersRoutes = require("./routes/users.router");
 
 
@@ -20,8 +20,10 @@ app.use(bodyParser.json());
 //       validateRequests: true,
 //     }),
 // );
-
+app.use("/restaurants", restaurantsRoutes);
 app.use("/users", usersRoutes);
+
+
 
 // app.use((err, req, res, next) => {
 //     res.status(err.status || 500).json({
