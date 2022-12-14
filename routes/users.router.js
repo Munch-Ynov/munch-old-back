@@ -4,6 +4,7 @@ const userController = require('../controllers/users.controllers');
 const userMiddleware = require('../middlewares/users.middlewares');
 
 router.get('/', userMiddleware, userController.getAllUsers);
+router.get('/me', userMiddleware, userController.getMe);
 router.get('/:id', userMiddleware, userController.getUserById);
 router.post('/', userController.createUser);
 router.post('/login', userController.loginUser);
