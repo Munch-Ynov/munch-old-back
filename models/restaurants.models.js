@@ -1,8 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database");
+const { faker } = require('@faker-js/faker/locale/fr');
 
 const Restaurant = sequelize.define("Restaurant", {
-    id: { 
+    id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -10,20 +11,25 @@ const Restaurant = sequelize.define("Restaurant", {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: faker.company.companyName(),
     },
     address: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: faker.address.streetAddress()
     },
     description: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: faker.lorem.paragraph()
     },
     price: {
         type: DataTypes.ENUM("€", "€€", "€€€", "€€€€"),
         allowNull: false,
+        defaultValue: faker.helpers.arrayElement(["€", "€€", "€€€", "€€€€"])
     },
 });
+
 
 sequelize.sync().then(() => {
     console.log('Restaurant table created successfully!');
