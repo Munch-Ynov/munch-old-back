@@ -1,6 +1,7 @@
 const reservationsService = require('../services/reservations.service');
 const usersService = require('../services/users.service');
 const restaurantsService = require('../services/restaurants.service');
+
 async function getAllReservations(req, res) {
     const reservations = await reservationsService.getAllReservations();
 
@@ -30,11 +31,9 @@ async function getReservationById(req, res) {
 async function createReservation(req, res) {
     if (!req.body.user_id || !req.body.restaurant_id || !req.body.nb_people || !req.body.date || !req.body.status) {
         return res.status(400).json({ message: 'user_id, restaurant_id, nb_people, date and status are required' });
-    }
-
+    } 
     else {
         // verify if user exists
-        console.log(req.body.user_id);
         try {
             const user = await usersService.getUserById(req.body.user_id);
             if (!user) {
