@@ -11,7 +11,7 @@ const Restaurant = sequelize.define("Restaurant", {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: faker.company.companyName(),
+        defaultValue: faker.company.name(),
     },
     address: {
         type: DataTypes.STRING,
@@ -29,7 +29,6 @@ const Restaurant = sequelize.define("Restaurant", {
         defaultValue: faker.helpers.arrayElement(["€", "€€", "€€€", "€€€€"])
     },
 });
-
 
 sequelize.sync().then(() => {
     console.log('Restaurant table created successfully!');
