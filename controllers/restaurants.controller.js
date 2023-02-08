@@ -1,4 +1,5 @@
 const restaurantService = require('../services/restaurants.service');
+const usersService = require('../services/users.service');
 
 async function getAllRestaurants(req, res) {
     const restaurants = await restaurantService.getAllRestaurants();
@@ -27,16 +28,21 @@ async function getRestaurantById(req, res) {
 }
 
 async function createRestaurant(req, res) {
-    if (!req.body.name || !req.body.address || !req.body.description || !req.body.price) {
-        return res.status(400).json({ message: 'name, address, city, state, zip and cuisine are required' });
-    } else {
-        const restaurant = await restaurantService.createRestaurant(req.body);
-
-        if (!restaurant) {
-            return res.status(400).json({ message: 'Restaurant not created' });
-        } else {
-            return res.status(201).json(restaurant);
+    // verify if user exists
+    try {
+        const user = await usersService.getUserById(req.body.user_id);
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
         }
+    } catch (error) {
+        return res.status(400).json({ message: 'User not found' });
+    }
+    const restaurant = await restaurantService.createRestaurant(req.body);
+
+    if (!restaurant) {
+        return res.status(400).json({ message: 'Restaurant not created' });
+    } else {
+        return res.status(201).json(restaurant);
     }
 }
 
