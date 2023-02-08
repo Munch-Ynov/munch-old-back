@@ -28,7 +28,10 @@ async function getUserById(req, res) {
     }
 }
 async function getMe(req, res) {
-    const token = req.headers.cookie.split('=')[1];
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).send('Accès refusé. Aucun token fourni.');
+      }
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
     const user = await UsersService.getUserById(userId);
@@ -107,6 +110,12 @@ async function deleteUser(req, res) {
     }
 }
 
+async function logOutUser(req, res) {
+    if(!req.cookies.token) return res.status(401).json({ message: 'User not logged in' });
+    res.clearCookie('token');
+    return res.status(200).json({ message: 'User logged out' });
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
@@ -114,5 +123,8 @@ module.exports = {
     getMe,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    logOutUser
+
+
 };
