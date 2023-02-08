@@ -7,7 +7,7 @@ const OpenApiValidator = require('express-openapi-validator');
 const cors = require("cors");
 const restaurantsRoutes = require("./routes/restaurants.router");
 const usersRoutes = require("./routes/users.router");
-
+const reservationsRoutes = require("./routes/reservations.router");
 
 app.use(express.json());
 app.use(cors());
@@ -20,10 +20,10 @@ app.use(cors());
 //       validateRequests: true,
 //     }),
 // );
+
 app.use("/restaurants", restaurantsRoutes);
 app.use("/users", usersRoutes);
-
-
+app.use("/reservations", reservationsRoutes);
 
 // app.use((err, req, res, next) => {
 //     res.status(err.status || 500).json({
