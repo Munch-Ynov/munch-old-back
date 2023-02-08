@@ -10,7 +10,10 @@ const usersRoutes = require("./routes/users.router");
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    credentials: true,
+}) );
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

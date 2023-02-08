@@ -6,13 +6,16 @@ app.use(cookieParser());
 
 module.exports = (req, res, next) => {
     try {
-        const token = req.headers.cookie.split('=')[1];
+        const token = req.cookies.token;
+        if(!token){
+            return res.status(401).send('Access refusé. Aucun token fourni.')
+        }
+
+        console.log(token);
+
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedToken.id;
-        req.auth = {
-            userId: userId
-        }
-        if (req.body.userId && req.body.userId !== userId) {
+        if (!userId) {
             throw 'Invalid user ID';
         } else {
             next();
