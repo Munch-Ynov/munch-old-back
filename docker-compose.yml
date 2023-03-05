@@ -29,17 +29,17 @@ services:
   #   links:
   #     - mysql:mysql
 
-  # mysql:
-  #   container_name: mysql-container
-  #   image: mysql
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_DATABASE: netflix_wish
-  #   ports:
-  #     - "3306:3306"
-  #   expose:
-  #     - "3306"
+  mysql:
+    container_name: mysql-container
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: munch-root
+      MYSQL_DATABASE: munch
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
 
   redis:
     image: redis
