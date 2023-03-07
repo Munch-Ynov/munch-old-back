@@ -1,6 +1,6 @@
-const redis = require('redis');
+import { createClient } from 'redis';
 
-const client = redis.createClient({
+const client = createClient({
     url: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
     legacyMode: true,
@@ -8,4 +8,4 @@ const client = redis.createClient({
 
 client.connect();
 
-module.exports = client;
+export default client;
