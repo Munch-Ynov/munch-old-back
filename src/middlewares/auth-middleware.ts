@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken');
-const express = require('express');
-const app = express();
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+import { verify } from 'jsonwebtoken';
+import {Response, Request, NextFunction} from 'express';
+import jwt from 'jsonwebtoken';
 
-module.exports = (req, res, next) => {
+
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.cookies.token;
         if(!token){
@@ -13,8 +12,8 @@ module.exports = (req, res, next) => {
 
         console.log(token);
 
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decodedToken.id;
+        const decodedToken = jwt.verify(token, `${process.env.JWT_SECRET}`);
+        const userId = decodedToken;
         if (!userId) {
             throw 'Invalid user ID';
         } else {
