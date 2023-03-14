@@ -2,12 +2,12 @@ import { PrismaClient, Reservation, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export const getAllReservationsModel = async () => {
+export const getAllReservationsService = async () => {
     return await prisma.reservation.findMany({
     })
 }
 
-export const getReservationByIdModel = async (id: number) => {
+export const getReservationByIdService = async (id: number) => {
     return await prisma.reservation.findUnique({
         where: {
             id: id
@@ -15,13 +15,13 @@ export const getReservationByIdModel = async (id: number) => {
     })
 }
 
-export const createReservationModel = async (Reservation: Prisma.ReservationCreateInput) => {
+export const createReservationService = async (Reservation: Prisma.ReservationCreateInput) => {
     return await prisma.reservation.create({
         data: Reservation
     })
 }
 
-export const updateReservationModel = async (id: number, Reservation: Prisma.ReservationUpdateInput)=> {
+export const updateReservationService = async (id: number, Reservation: Prisma.ReservationUpdateInput)=> {
     return await prisma.reservation.update({
         where: {
             id: id
@@ -30,7 +30,7 @@ export const updateReservationModel = async (id: number, Reservation: Prisma.Res
     })
 }
 
-export const deleteReservationModel = async (id: number) => {
+export const deleteReservationService = async (id: number) => {
     return await prisma.reservation.delete({
         where: {
             id: id

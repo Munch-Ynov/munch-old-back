@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response, RequestHandler } from "express";
-import { getAllReservationsModel } from "../../../models/Reservation";
+import { getAllReservationsService } from "../../../services/Reservation";
 
 export const getAllReservations: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const Reservations = await getAllReservationsModel();
+        const Reservations = await getAllReservationsService();
         if(!Reservations){
             return res.status(404).json({ message: 'Reservations not found' });
         }
