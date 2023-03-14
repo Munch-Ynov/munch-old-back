@@ -4,7 +4,6 @@ import { getAllUsers } from "./handlers/getAllUsersRequest";
 import { getMe } from "./handlers/getMeRequest";
 import { getUserById } from "./handlers/getUserByIdRequest";
 import { loginUser } from "./handlers/loginUserRequest";
-import { logoutUser } from "./handlers/logoutUserRequest";
 import { updateUser } from "./handlers/updateUserRequest";
 
 export default { 
@@ -15,5 +14,4 @@ export default {
     updateUser,
     deleteUser,
     getMe,
-    logoutUser
 }

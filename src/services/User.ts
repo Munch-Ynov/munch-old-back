@@ -2,12 +2,12 @@ import { PrismaClient, User, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export const getAllUsersModel = async () => {
+export const getAllUsersService = async () => {
     return await prisma.user.findMany({
     })
 }
 
-export const getUserByIdModel = async (id: number) => {
+export const getUserByIdService = async (id: number) => {
     return await prisma.user.findUnique({
         where: {
             id: id
@@ -15,7 +15,7 @@ export const getUserByIdModel = async (id: number) => {
     })
 }
 
-export const getUserByEmailModel = async (email: string) => {
+export const getUserByEmailService = async (email: string) => {
     return await prisma.user.findUnique({
         where: {
             email: email
@@ -23,13 +23,13 @@ export const getUserByEmailModel = async (email: string) => {
     })
 }
 
-export const createUserModel = async (user: Prisma.UserCreateInput) => {
+export const createUserService = async (user: Prisma.UserCreateInput) => {
     return await prisma.user.create({
         data: user
     })
 }
 
-export const updateUserModel = async (id: number, user: Prisma.UserUpdateInput)=> {
+export const updateUserService = async (id: number, user: Prisma.UserUpdateInput)=> {
     return await prisma.user.update({
         where: {
             id: id
@@ -38,7 +38,7 @@ export const updateUserModel = async (id: number, user: Prisma.UserUpdateInput)=
     })
 }
 
-export const deleteUserModel = async (id: number): Promise<User | null> => {
+export const deleteUserService = async (id: number): Promise<User | null> => {
     return await prisma.user.delete({
         where: {
             id: id
