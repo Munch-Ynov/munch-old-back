@@ -7,7 +7,9 @@
   "scripts": {
     "test": "jest --runInBand --forceExit",
     "build": "tsc",
-    "start": "node ./dist/server.js",
+    "postinstall": "prisma generate",
+    "start": "node ./dist/index.js",
+    "docker:start": "node ./index.js",
     "dev": "nodemon ./src/index.ts"
   },
   "repository": {
