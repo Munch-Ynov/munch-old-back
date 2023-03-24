@@ -7,6 +7,33 @@ services:
     restart: always
     ports:
       - 3000:3000
+    env_file:
+      - dev.env
+    depends_on:
+      - mysql
 
-    volumes:
-      - .:/app
+  mysql:
+    container_name: mysql-container
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+
+  munch-front:
+    container_name: munch-front-container
+    image: munch-front:v0.1
+    working_dir: /app
+    restart: always
+    ports:
+      - 80:80
+
+
+
+
+
+    
