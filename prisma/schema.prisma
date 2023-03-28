@@ -27,7 +27,7 @@ model User {
 model Restaurants {
   id           Int           @id @default(autoincrement())
   user         User?         @relation(fields: [userId], references: [id])
-  userId       Int           @unique
+  userId       Int?          @unique
   name         String        @db.VarChar(255)
   address      String        @db.VarChar(255)
   description  String        @db.VarChar(255)
