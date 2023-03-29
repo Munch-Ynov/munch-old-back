@@ -1,28 +1,28 @@
-import { PrismaClient, Restaurants, Prisma } from '@prisma/client'
+import { PrismaClient, Restaurant, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export const getAllRestaurantsService = async () => {
-    return await prisma.restaurants.findMany({
+    return await prisma.restaurant.findMany({
     })
 }
 
 export const getRestaurantByIdService = async (id: number) => {
-    return await prisma.restaurants.findUnique({
+    return await prisma.restaurant.findUnique({
         where: {
             id: id
         }
     })
 }
 
-export const createRestaurantService = async (restaurant: Prisma.RestaurantsCreateInput): Promise<Restaurants> => {
-    return await prisma.restaurants.create({
+export const createRestaurantService = async (restaurant: Prisma.RestaurantCreateInput): Promise<Restaurant> => {
+    return await prisma.restaurant.create({
         data: restaurant
     })
 }
 
-export const updateRestaurantService = async (id: number, restaurant: Prisma.RestaurantsUpdateInput): Promise<Restaurants | null> => {
-    return await prisma.restaurants.update({
+export const updateRestaurantService = async (id: number, restaurant: Prisma.RestaurantUpdateInput): Promise<Restaurant | null> => {
+    return await prisma.restaurant.update({
         where: {
             id: id
         },
@@ -31,7 +31,7 @@ export const updateRestaurantService = async (id: number, restaurant: Prisma.Res
 }
 
 export const deleteRestaurantService = async (id: number) => {
-    return await prisma.restaurants.delete({
+    return await prisma.restaurant.delete({
         where: {
             id: id
         }
