@@ -16,15 +16,15 @@ model User {
   lastName     String        @db.VarChar(255)
   email        String        @unique
   password     String
-  restaurant   Restaurants?
+  restaurant   Restaurant?
   admin        Boolean       @default(false)
-  favorites    Favorites[]
+  favorites    Favorite[]
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
 
-model Restaurants {
+model Restaurant {
   id           Int           @id @default(autoincrement())
   user         User?         @relation(fields: [userId], references: [id])
   userId       Int?          @unique
@@ -37,17 +37,18 @@ model Restaurants {
   code_postal  String        @db.VarChar(255)
   city         String        @db.VarChar(255)
   email        String        @db.VarChar(255)
-  favorites    Favorites[]
+  features     Feature[]
+  favorites    Favorite[]
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
 
-model Favorites {
+model Favorite {
   id           Int         @id @default(autoincrement())
   user         User        @relation(fields: [userId], references: [id])
   userId       Int
-  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
@@ -57,7 +58,7 @@ model Reservation {
   id           Int         @id @default(autoincrement())
   user         User        @relation(fields: [userId], references: [id])
   userId       Int
-  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
   date         DateTime
   nb_people    Int
@@ -77,4 +78,23 @@ enum Price {
   MODERATE
   EXPENSIVE
   VERY_EXPENSIVE
+}
+
+model Feature {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  icon String? @db.VarChar(255)
+  category Category @relation(fields: [categoryId], references: [id])
+  restaurants Restaurant[]
+  categoryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id Int  @id @default(autoincrement())
+  name String @db.VarChar(255)
+  features Feature[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
