@@ -26,7 +26,7 @@ services:
 
   munch-front:
     container_name: munch-front-container
-    image: munch-front:v0.1
+    image: ghcr.io/munch-ydays/munch-front:latest
     working_dir: /app
     restart: always
     ports:
