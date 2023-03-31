@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   api:
-    image: munch-api:v0.1
+    image: munch-api:v0.2
     working_dir: /app
     restart: always
     ports:
@@ -16,9 +16,11 @@ services:
     container_name: mysql-container
     image: mysql
     restart: always
+    env_file:
+      - dev.env
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "3306:3306"
     expose:
