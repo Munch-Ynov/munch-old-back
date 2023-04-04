@@ -14,7 +14,3 @@ COPY --from=build-stage /app/prisma ./prisma
 COPY --from=build-stage /app/package.json .
 CMD ["sh", "-c", "npx prisma migrate dev && npm run docker:start"]
 
-# FROM nginx:alpine
-# COPY --from=build-stage /app/dist /usr/share/nginx/html
-# COPY --from=build-stage /app/prisma /usr/share/nginx/html
-# COPY --from=build-stage /app/package.json /usr/share/nginx/html

@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   api:
-    image: munch-api:v0.2
+    image: ghcr.io/munch-ydays/munch-api:v0.2
     working_dir: /app
     restart: always
     ports:
