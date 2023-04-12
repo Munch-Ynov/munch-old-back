@@ -28,7 +28,7 @@ export const createUserService = async (user: Prisma.UserCreateInput) => {
         data: user
     })
 }
-
+    
 export const updateUserService = async (id: number, user: Prisma.UserUpdateInput)=> {
     return await prisma.user.update({
         where: {
