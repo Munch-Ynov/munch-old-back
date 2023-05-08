@@ -72,7 +72,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-#.env
+.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -111,5 +111,3 @@ dist
 .env # Environment variables
 .env.local # Local overrides. This file is loaded for all environments except test.
 .env.production # Production
-
-package-lock.json
