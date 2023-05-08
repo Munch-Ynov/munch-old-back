@@ -111,3 +111,5 @@ dist
 .env # Environment variables
 .env.local # Local overrides. This file is loaded for all environments except test.
 .env.production # Production
+
+package-lock.json
