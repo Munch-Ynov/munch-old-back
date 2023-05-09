@@ -1,14 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-  
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
@@ -16,18 +14,18 @@ model User {
   firstName    String        @db.VarChar(255)
   lastName     String        @db.VarChar(255)
   email        String        @unique
+  phone        String?       @db.VarChar(255)
   password     String
-  restaurant   Restaurant?
   admin        Boolean       @default(false)
-  favorites    Favorite[]
-  reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  restaurant   Restaurant?
+  favorites    Favorite[]
+  reservations Reservation[]
 }
 
 model Restaurant {
   id           Int           @id @default(autoincrement())
-  user         User?         @relation(fields: [userId], references: [id])
   userId       Int?          @unique
   name         String        @db.VarChar(255)
   address      String        @db.VarChar(255)
@@ -38,34 +36,63 @@ model Restaurant {
   code_postal  String        @db.VarChar(255)
   city         String        @db.VarChar(255)
   email        String        @db.VarChar(255)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User?         @relation(fields: [userId], references: [id])
   features     Feature[]
   favorites    Favorite[]
   reservations Reservation[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
 }
 
 model Favorite {
-  id           Int         @id @default(autoincrement())
-  user         User        @relation(fields: [userId], references: [id])
+  id           Int        @id @default(autoincrement())
   userId       Int
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  user         User       @relation(fields: [userId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
 }
 
 model Reservation {
-  id           Int         @id @default(autoincrement())
-  user         User        @relation(fields: [userId], references: [id])
+  id           Int        @id @default(autoincrement())
   userId       Int
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
   date         DateTime
   nb_people    Int
-  status       Status      @default(PENDING)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  status       Status     @default(PENDING)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  user         User       @relation(fields: [userId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+}
+
+model Feature {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(255)
+  icon        String?      @db.VarChar(255)
+  categoryId  Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  category    Category     @relation(fields: [categoryId], references: [id])
+  restaurants Restaurant[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  features  Feature[]
+}
+
+model FeatureToRestaurant {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_FeatureToRestaurant_AB_unique")
+  @@index([B], map: "_FeatureToRestaurant_B_index")
+  @@map("_FeatureToRestaurant")
 }
 
 enum Status {
@@ -79,23 +106,4 @@ enum Price {
   MODERATE
   EXPENSIVE
   VERY_EXPENSIVE
-}
-
-model Feature {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  icon String? @db.VarChar(255)
-  category Category @relation(fields: [categoryId], references: [id])
-  restaurants Restaurant[]
-  categoryId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Category {
-  id Int  @id @default(autoincrement())
-  name String @db.VarChar(255)
-  features Feature[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

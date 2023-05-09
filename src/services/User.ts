@@ -11,6 +11,10 @@ export const getUserByIdService = async (id: number) => {
     where: {
       id: id,
     },
+    include: {
+      reservations: true,
+      // reviews: true,
+    },
   });
 };
 
@@ -18,6 +22,10 @@ export const getUserByEmailService = async (email: string) => {
   return await prisma.user.findUnique({
     where: {
       email: email,
+    },
+    include: {
+      reservations: true,
+      // reviews: true,
     },
   });
 };
