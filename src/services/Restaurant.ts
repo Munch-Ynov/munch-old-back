@@ -7,7 +7,7 @@ export const getAllRestaurantsService = async () => {
     })
 }
 
-export const getRestaurantByIdService = async (id: number) => {
+export const getRestaurantByIdService = async (id: string) => {
     return await prisma.restaurant.findUnique({
         where: {
             id: id
@@ -21,7 +21,7 @@ export const createRestaurantService = async (restaurant: Prisma.RestaurantCreat
     })
 }
 
-export const updateRestaurantService = async (id: number, restaurant: Prisma.RestaurantUpdateInput): Promise<Restaurant | null> => {
+export const updateRestaurantService = async (id: string, restaurant: Prisma.RestaurantUpdateInput): Promise<Restaurant | null> => {
     return await prisma.restaurant.update({
         where: {
             id: id
@@ -30,7 +30,7 @@ export const updateRestaurantService = async (id: number, restaurant: Prisma.Res
     })
 }
 
-export const deleteRestaurantService = async (id: number) => {
+export const deleteRestaurantService = async (id: string) => {
     return await prisma.restaurant.delete({
         where: {
             id: id

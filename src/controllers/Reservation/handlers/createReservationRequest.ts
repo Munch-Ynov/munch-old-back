@@ -7,7 +7,7 @@ export const createReservation: RequestHandler = async (req: Request, res: Respo
         return res.status(400).json({ message: 'user_id, restaurant_id, nb_people, date and status are required' });
     } 
 
-    const user = await getUserByIdService(+req.body.id);
+    const user = await getUserByIdService(req.body.user_id);
     if(!user){
         return res.status(404).json({ message: 'User not found' });
     }

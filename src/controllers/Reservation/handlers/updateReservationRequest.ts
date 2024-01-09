@@ -6,7 +6,7 @@ export const updateReservation: RequestHandler = async (req: Request, res: Respo
         if(!req.params.id){
             return res.status(400).json({ message: 'id is required' });
         }
-        const Reservation = await updateReservationService(+req.params.id, req.body);
+        const Reservation = await updateReservationService(req.params.id, req.body);
         if(!Reservation){
             return res.status(404).json({ message: 'Reservation not found' });
         }

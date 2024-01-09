@@ -11,7 +11,7 @@ export const getMe: RequestHandler = async (req: Request, res: Response, next: N
             return res.status(401).send('Accès refusé. Aucun token fourni.');
           }
         try{
-            const decodedToken = jwt.verify(token, `${process.env.JWT_SECRET}`) as { id: number }
+            const decodedToken = jwt.verify(token, `${process.env.JWT_SECRET}`) as { id: string }
             const userId = decodedToken.id;
             const user = await getUserByIdService(userId);
         

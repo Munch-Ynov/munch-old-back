@@ -6,7 +6,7 @@ export const updateUser: RequestHandler = async (req: Request, res: Response, ne
         if(!req.params.id){
             return res.status(400).json({ message: 'id is required' });
         }
-        const user = await updateUserService(+req.params.id, req.body);
+        const user = await updateUserService(req.params.id, req.body);
         if(!user){
             return res.status(404).json({ message: 'User not found' });
         }

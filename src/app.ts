@@ -8,14 +8,6 @@ import logger from "morgan";
 import { UserRouter } from "./routes/UserRouter";
 import { RestaurantRouter } from "./routes/RestaurantRouter";
 import { ReservationRouter } from "./routes/ReservationRouter";
-// const swaggerUi = require('swagger-ui-express');
-// const YAML = require('yamljs');
-// const swaggerDocument = YAML.load('./openapi.yaml');
-// const OpenApiValidator = require('express-openapi-validator');
-// const restaurantsRoutes = require("./routes/restaurants.router");
-// const usersRoutes = require("./routes/users.router");
-// const reservationsRoutes = require("./routes/reservations.router");
-
 
 const app = express();
 

@@ -3,10 +3,10 @@ import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getAllReservationsService = async () => {
-  return await prisma.reservation.findMany({});
+  return await prisma.reservation.findMany();
 };
 
-export const getReservationByIdService = async (id: number) => {
+export const getReservationByIdService = async (id: string) => {
   return await prisma.reservation.findUnique({
     where: {
       id: id,
@@ -14,7 +14,7 @@ export const getReservationByIdService = async (id: number) => {
   });
 };
 
-export const getReservationByUserIdService = async (userId: number) => {
+export const getReservationByUserIdService = async (userId: string) => {
   return await prisma.reservation.findMany({
     where: {
       userId: userId,
@@ -34,7 +34,7 @@ export const createReservationService = async (
 };
 
 export const updateReservationService = async (
-  id: number,
+  id: string,
   Reservation: Prisma.ReservationUpdateInput
 ) => {
   return await prisma.reservation.update({
@@ -45,7 +45,7 @@ export const updateReservationService = async (
   });
 };
 
-export const deleteReservationService = async (id: number) => {
+export const deleteReservationService = async (id: string) => {
   return await prisma.reservation.delete({
     where: {
       id: id,

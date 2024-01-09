@@ -6,7 +6,7 @@ export const getRestaurantById: RequestHandler = async (req: Request, res: Respo
         if(!req.params.id){
             return res.status(400).json({ message: 'id is required' });
         }
-        const restaurant = await getRestaurantByIdService(+req.params.id);
+        const restaurant = await getRestaurantByIdService(req.params.id);
         if(!restaurant){
             return res.status(404).json({ message: 'Restaurant not found' });
         }

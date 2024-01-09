@@ -1,4 +1,4 @@
-import { PrismaClient, User, Prisma } from "@prisma/client";
+import { Prisma, User, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -6,13 +6,13 @@ export const getAllUsersService = async () => {
   return await prisma.user.findMany({});
 };
 
-export const getUserByIdService = async (id: number) => {
+export const getUserByIdService = async (id: string) => {
   return await prisma.user.findUnique({
     where: {
       id: id,
     },
     include: {
-      reservations: true,
+      reservation: true,
       // reviews: true,
     },
   });
@@ -24,7 +24,7 @@ export const getUserByEmailService = async (email: string) => {
       email: email,
     },
     include: {
-      reservations: true,
+      reservation: true,
       // reviews: true,
     },
   });
@@ -37,7 +37,7 @@ export const createUserService = async (user: Prisma.UserCreateInput) => {
 };
 
 export const updateUserService = async (
-  id: number,
+  id: string,
   user: Prisma.UserUpdateInput
 ) => {
   return await prisma.user.update({
@@ -48,7 +48,7 @@ export const updateUserService = async (
   });
 };
 
-export const deleteUserService = async (id: number): Promise<User | null> => {
+export const deleteUserService = async (id: string): Promise<User | null> => {
   return await prisma.user.delete({
     where: {
       id: id,

@@ -6,7 +6,7 @@ export const deleteReservation: RequestHandler = async (req: Request, res: Respo
         if(!req.params.id){
             return res.status(400).json({ message: 'id is required' });
         }
-        const Reservation = await deleteReservationService(+req.params.id);
+        const Reservation = await deleteReservationService(req.params.id);
         if(!Reservation){
             return res.status(404).json({ message: 'Reservation not found' });
         }

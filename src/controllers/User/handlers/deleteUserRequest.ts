@@ -6,7 +6,7 @@ export const deleteUser: RequestHandler = async (req: Request, res: Response, ne
         if(!req.params.id){
             return res.status(400).json({ message: 'id is required' });
         }
-        const user = await deleteUserService(+req.params.id);
+        const user = await deleteUserService(req.params.id);
         if(!user){
             return res.status(404).json({ message: 'User not found' });
         }

@@ -11,7 +11,7 @@ export const getReservationByUserId: RequestHandler = async (
       return res.status(400).json({ message: "userId is required" });
     }
     const Reservations = await getReservationByUserIdService(
-      +req.params.userId
+      req.params.userId
     );
     if (!Reservations) {
       return res.status(404).json({ message: "Reservations not found" });
